@@ -70,6 +70,8 @@ const styles = StyleSheet.create({
     width: WP(10),
     height: WP(10),
     borderRadius: WP(10) / 2,
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: Colors.RED,
   },
 });

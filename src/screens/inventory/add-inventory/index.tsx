@@ -93,20 +93,14 @@ const AddInventory = () => {
                     width={WP(40)}
                   />
                 </View>
-                <MaterialCommunityIcons
-                  name="delete"
-                  size={WP(8)}
-                  color={Colors.PRIMARY}
-                  onPress={() => setState({...state, photo: ''})}
-                  style={[
-                    styles.deleteIcon,
-                    {
-                      paddingLeft: WP(1.2),
-                      paddingTop: WP(0.5),
-                      alignItems: 'center',
-                    },
-                  ]}
-                />
+                <View style={styles.deleteIcon}>
+                  <MaterialCommunityIcons
+                    name="delete"
+                    size={WP(8)}
+                    color={Colors.PRIMARY}
+                    onPress={() => setState({...state, photo: ''})}
+                  />
+                </View>
               </View>
             ) : (
               <Pressable
