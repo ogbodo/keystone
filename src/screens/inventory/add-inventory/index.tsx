@@ -71,6 +71,7 @@ const AddInventory = () => {
                         },
                       ],
                       showAddModal: false,
+                      selected: null,
                     }));
                     setState({
                       id: 0,
