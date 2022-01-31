@@ -1,10 +1,13 @@
 import React from 'react';
 import {View, Text} from 'react-native';
+import {Colors} from '../../utils/color';
 
 const MenuScreen = () => {
   return (
     <View>
-      <Text>Welcome to Menu Screen.</Text>
+      <Text style={{textAlign: 'center', color: Colors.BLACK_COLOR}}>
+        Welcome to Menu Screen.
+      </Text>
     </View>
   );
 };

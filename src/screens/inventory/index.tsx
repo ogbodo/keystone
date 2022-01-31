@@ -1,19 +1,25 @@
 import React, {useCallback} from 'react';
-import {FlatList, Image, SafeAreaView, Text, View} from 'react-native';
-import Header from '../../components/header';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {FlatList, Image, Text, View} from 'react-native';
 import {widthPercentageToDP as WP} from 'react-native-responsive-screen';
-import {Colors} from '../../utils/color';
-import {Valuables} from '../../data/dummy_data.json';
 import Card from '../../components/card';
 import {IValuable} from './types';
 import styles from './style';
 import {CARD_WIDTH} from '../../constants';
+import {useRecoilState} from 'recoil';
+import {globalDataState} from '../../global';
 
-const InventoryScreen = () => {
+const InventoryScreen = (props: any) => {
+  const [globalData, setGlobalData] = useRecoilState(globalDataState);
   const _renderItem = useCallback(
     ({item}: {item: IValuable}) => (
-      <Card>
+      <Card
+        handleClick={() => {
+          setGlobalData(prev => ({
+            ...prev,
+            selected: item,
+            showAddModal: true,
+          }));
+        }}>
         <Image
           source={{uri: item.photo, height: WP(40)}}
           resizeMode="cover"
@@ -28,16 +34,21 @@ const InventoryScreen = () => {
         </View>
       </Card>
     ),
-    [],
+    [globalData.valuables.length],
   );
 
   return (
     <View>
       <FlatList
         numColumns={Math.ceil(WP(80) / CARD_WIDTH)}
-        data={Valuables}
+        data={globalData.valuables}
         renderItem={_renderItem}
         keyExtractor={item => `${item.id}`}
+        ListEmptyComponent={
+          <View style={styles.emptyList}>
+            <Text style={styles.emptyListText}>Empty List</Text>
+          </View>
+        }
       />
     </View>
   );

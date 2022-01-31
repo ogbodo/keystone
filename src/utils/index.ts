@@ -1,3 +1,4 @@
+import {Alert} from 'react-native';
 import {widthPercentageToDP as WP} from 'react-native-responsive-screen';
 import {Colors} from './color';
 
@@ -12,4 +13,26 @@ export const shadow = {
   shadowColor: Colors.GRAY,
   shadowOpacity: WP(0.15),
   shadowRadius: WP(4),
+};
+
+export const inputValidator = (
+  value: {[key: string]: any},
+  beSpecific?: boolean,
+) => {
+  // Validate for empty fields
+  for (const key in value) {
+    if (!value[key]) {
+      if (beSpecific) {
+        showMessage(`${key} is not allowed to be empty`);
+        return;
+      }
+      showMessage('Please fill all required fields');
+      return;
+    }
+  }
+  return true;
+};
+
+const showMessage = (message: string) => {
+  Alert.alert(message);
 };

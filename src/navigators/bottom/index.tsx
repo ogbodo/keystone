@@ -1,16 +1,18 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Colors} from '../../utils/color';
-import {useRecoilValue} from 'recoil';
 import Screens from '../../screens';
 import React from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {widthPercentageToDP as WP} from 'react-native-responsive-screen';
 import Header from '../../components/header';
+import {useSetRecoilState} from 'recoil';
+import {globalDataState} from '../../global';
 
 const BottomTab = createBottomTabNavigator();
 
 export default function BottomNavigator() {
+  const setGlobalData = useSetRecoilState(globalDataState);
   return (
     <BottomTab.Navigator
       screenOptions={{
@@ -47,8 +49,11 @@ export default function BottomNavigator() {
               icon={() => (
                 <MaterialCommunityIcons
                   name="plus-circle"
-                  size={WP(8)}
+                  size={WP(10)}
                   color={Colors.SECONDARY}
+                  onPress={() => {
+                    setGlobalData(prev => ({...prev, showAddModal: true}));
+                  }}
                 />
               )}
             />
