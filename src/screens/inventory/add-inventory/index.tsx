@@ -72,6 +72,14 @@ const AddInventory = () => {
                       ],
                       showAddModal: false,
                     }));
+                    setState({
+                      id: 0,
+                      name: '',
+                      photo: '',
+                      purchasePrice: 0,
+                      type: '',
+                      description: '',
+                    });
                   } else {
                     Alert.alert(
                       'Sorry, you can only add values up to 40,000 euros in total.',
